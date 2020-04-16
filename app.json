@@ -1,0 +1,8 @@
+{
+  "name": "TimeZone Server, Go",
+  "description": "Simple HTTP TimeZone server",
+  "keywords": [
+    "time_zone",
+    "go"
+  ]
+}
