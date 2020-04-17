@@ -10,6 +10,34 @@ Ii. Next, write a function that solves this problem by performing two binary sea
 
 ### Benchmark
 Benchmark both the functions for random sorted arrays of size 10, 100, ..., up to 10,000,000.
+
+```
+$ go run main.go
+LinearScan: 3 appears 2 times | Duration: 116 ns
+twoBinarySearchScan: 3 appears 2 times | Duration: 178 ns
+-------------------------------------------------------------------------------------------------
+LinearScan: 55 appears 4 times | Duration: 143 ns
+twoBinarySearchScan: 55 appears 4 times | Duration: 206 ns
+-------------------------------------------------------------------------------------------------
+LinearScan: 509 appears 3 times | Duration: 560 ns
+twoBinarySearchScan: 509 appears 3 times | Duration: 259 ns
+-------------------------------------------------------------------------------------------------
+LinearScan: 5034 appears 5 times | Duration: 4984 ns
+twoBinarySearchScan: 5034 appears 5 times | Duration: 228 ns
+-------------------------------------------------------------------------------------------------
+LinearScan: 49808 appears 2 times | Duration: 58266 ns
+twoBinarySearchScan: 49808 appears 2 times | Duration: 269 ns
+-------------------------------------------------------------------------------------------------
+LinearScan: 500542 appears 1 times | Duration: 520720 ns
+twoBinarySearchScan: 500542 appears 1 times | Duration: 415 ns
+-------------------------------------------------------------------------------------------------
+LinearScan: 4996386 appears 1 times | Duration: 5183771 ns
+twoBinarySearchScan: 4996386 appears 1 times | Duration: 741 ns
+-------------------------------------------------------------------------------------------------
+```
+
+
+Benchmark with go tests.
 ```
 $ go test -bench=.
 goos: darwin

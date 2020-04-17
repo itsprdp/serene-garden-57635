@@ -2,7 +2,41 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
+	"sort"
+	"time"
 )
+
+// custom []int32 to implement sort.Sort interface
+type int32arr []int32
+
+func (f int32arr) Len() int {
+	return len(f)
+}
+
+func (f int32arr) Less(i, j int) bool {
+	return f[i] < f[j]
+}
+
+func (f int32arr) Swap(i, j int) {
+	f[i], f[j] = f[j], f[i]
+}
+
+// generate random sorted integers array
+func randInt32Array(n int32) int32arr {
+	elements := int32arr{}
+
+	r := rand.New(rand.NewSource(99))
+
+	for i := int32(0); i < n; i++ {
+		// generate random index
+		w := r.Int31n(n)
+		elements = append(elements, w)
+	}
+
+	sort.Sort(elements)
+	return elements
+}
 
 // i. Write a function that solves this problem by performing a linear scan.
 func linearScan(array []int32, value int32) int {
@@ -56,7 +90,7 @@ func twoBinarySearchScan(array []int32, value int32) int {
 	return ((lastOccuranceIdx - firstOccuranceIdx) + 1)
 }
 
-func main() {
+func example() {
 	// Example:
 	// if x=5 and a=[1,1,2,4,5,5,7,9], then the count is 2.
 	a := []int32{1, 1, 2, 4, 5, 5, 7, 9}
@@ -64,4 +98,27 @@ func main() {
 	fmt.Println("LinearScan: 5 appears", linearScan(a, x), "times")
 
 	fmt.Println("TwoBinarySearchScan: 5 appears", twoBinarySearchScan(a, x), "times")
+}
+
+func main() {
+	max := int32(10000000)
+	i := int32(10)
+
+	for i <= max {
+		randSortedInts := randInt32Array(i)
+		findInt := randSortedInts[int32(i/2+rand.Int31n(10))]
+
+		startTime := time.Now()
+		result := linearScan(randSortedInts, findInt)
+		endTime := time.Now()
+		fmt.Println("LinearScan:", findInt, "appears", result, "times", "| Duration:", endTime.Sub(startTime).Nanoseconds(), "ns")
+
+		startTime = time.Now()
+		result = twoBinarySearchScan(randSortedInts, findInt)
+		endTime = time.Now()
+		fmt.Println("twoBinarySearchScan:", findInt, "appears", result, "times", "| Duration:", endTime.Sub(startTime).Nanoseconds(), "ns")
+		fmt.Println("-------------------------------------------------------------------------------------------------")
+
+		i = i * 10
+	}
 }

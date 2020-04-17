@@ -1,41 +1,8 @@
 package main
 
 import (
-	"math/rand"
-	"sort"
 	"testing"
 )
-
-// custom []int32 to implement sort.Sort interface
-type int32arr []int32
-
-func (f int32arr) Len() int {
-	return len(f)
-}
-
-func (f int32arr) Less(i, j int) bool {
-	return f[i] < f[j]
-}
-
-func (f int32arr) Swap(i, j int) {
-	f[i], f[j] = f[j], f[i]
-}
-
-// generate random sorted integers array
-func randInt32Array(n int32) int32arr {
-	elements := int32arr{}
-
-	r := rand.New(rand.NewSource(99))
-
-	for i := int32(0); i < n; i++ {
-		// generate random index
-		w := r.Int31n(n)
-		elements = append(elements, w)
-	}
-
-	sort.Sort(elements)
-	return elements
-}
 
 func BenchmarkLinearScan10(b *testing.B) {
 	i := int32(10)
