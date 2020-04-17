@@ -5,13 +5,6 @@ However, we can make the system more robust by introducing ”exponential backof
 
 In addition, we can add ”jitter” to randomize the backoff periods and prevent ”thundering herd” effects (e.g. wait a random period between 0.5 and 1.5 seconds, instead of exactly 1 second).
 
-Write a function that performs exponential backoff. Your function should take the following inputs:
-• An operation that might fail, represented in any suitable format for your language of choice (e.g. object with method, function pointer)
-• Duration of backoff periods
-• Criteria for giving up
-• Amount of jitter
-
-
 ### Usage:
 ```
 $ go run main.go
